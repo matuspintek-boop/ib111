@@ -1,0 +1,319 @@
+: title   : IB111 – Rady a Návody
+: authors : N. Kovářová, P. Ročkai
+: doctype : lnotes
+: typing  : plain
+: lang    : cs
+: toc     : yes
+
+# Časté problémy
+
+### Fonty a unicode
+
+Nezobrazují-li se Vám správně komentáře ve zdrojovém kódu (zejména
+matematika nebo obrázky), máte pravděpodobně nekompletní font
+(písmo). Pro editování zdrojového kódu doporučujeme font ‹Iosevka›,
+který je volně ke stažení na stránce
+$$html <tt><a href="https://typeof.net/Iosevka">typeof.net/Iosevka</a></tt>.
+
+### ‹[NBSP]› v PyCharm
+
+Chcete-li předejít tomu, aby Vám PyCharm místo (nedělitelných) mezer
+v komentářích zobrazoval řetězec ‹[NBSP]›, můžete si změnit
+nastavení takto: v ‹Help› → ‹Find Action› napište do vyhledávání
+„Registry“, dále pak vyhledejte nastavení
+‹editor.show.special.chars› a toto vypněte.
+
+# Inštalácia SW
+
+Tento návod popisuje, ako nainštalovať softvér, ktorý budete v tomto
+predmete potrebovať. Podľa vlastného uváženia môžete používať
+ľubovoľný iný softvér, ale môže sa samozrejme stať, že Vám s ním
+nebudeme schopní pomôcť.
+
+## Thonny
+
+Na programovanie v Pythone odporúčame program «Thonny» – jedná sa
+o vývojové prostredie určené na výuku programovania a je vhodné pre
+začiatočníkov aj mierne pokročilých. «Thonny» automaticky
+nainštaluje aj interpret jazyka «Python» (vo verzii 3.10.11;
+pre potreby IB111 je potrebná verzia 3.10 alebo novšia). Program si
+môžete stiahnuť z jeho
+$$html <a href="https://thonny.org/">oficiálnej stránky<a>.
+
+### Windows
+
+Zo stránky uvedenej vyššie si stiahnite inštalátor.
+$$html <img src="thonny_download.png" width="700">
+Inštalátor je ‹.exe› súbor, ktorý by ste po stiahnutí mali nájsť v priečinku ‹Stiahnuté súbory› (názov
+začína slovom ‹thonny›).
+
+Po spustení inštalátoru pokračujte nasledujúcimi krokmi:
+$$html <img src="thonny_install_1.png" width="700">
+Ďalej potvrďte aplikácii povolenie vytvárať zmeny.
+Potom stlačte tlačidlo ‹Next›.
+Potvrďte, že súhlasíte s licenčnými podmienkami a opäť pokračujte tlačidlom ‹Next›:
+$$html <img src="thonny_install_2.png" width="700">
+V nasledujúcom kroku zvolíte, do akého umiestnenia sa má Thonny nainštalovať. Môžte
+bez problémov ponechať predvolenú voľbu. Pokračujte tlačidlom ‹Next›:
+$$html <img src="thonny_install_3.png" width="700">
+Výber ‹Start Menu› priečinku v nasledujúcom kroku tiež môžte zachovať predvolený a ďalej
+pokračovať tlačidlom ‹Next›.
+Ďalej zvoľte, či chcete, aby Vám inštalátor vytvoril na ploche skratku k Thonny a pokračujte
+tlačidlom ‹Next›:
+$$html <img src="thonny_install_4.png" width="700">
+V nasledujúcom kroku pokračujte tlačidlom ‹Install›:
+$$html <img src="thonny_install_5.png" width="700">
+O pár minút bude inštalácia hotová. Na koniec ju ešte potvrďťe tlačidlom ‹Finish›.
+
+### Linux
+
+Doporučený způsob instalace je použít metodu „Installing prebuilt Thonny+Python
+bundles“ ze stránek Thonny. Touto metodou si zaručíte, že nebudete mít problémy
+s instalací pluginu pro EduLint (viz níže). V příkazovém řádku napište:
+
+‹bash <(curl -s https://thonny.org/installer-for-linux)›
+
+K tomu je třeba mít předem nainstalován balík ‹curl›. Nemáte-li ‹curl›, ale
+máte ‹wget›, můžete alternativně zkusit:
+
+‹bash <(wget -O - https://thonny.org/installer-for-linux)›
+
+Po skončení instalace byste měli mít Thonny v nabídce aplikací. Instalační
+skript vám zároveň napíše cestu k instalované binárce pro spuštění z příkazové
+řádky.
+
+### macOS
+
+Stiahnite inštalačný program zo stránky vyššie a nainštalujte
+obvyklým spôsobom.
+
+## EduLint
+
+«EduLint» je nástroj, který detekuje různé druhy programátorských chyb, od nevhodných programovacích konstrukcí přes porušení stylistických konvencí po některé časté problémy s kvalitou kódu. K řadě nedostatků je také schopen objasnit, proč je daný problém vhodné řešit, a na ukázkových kódech ilustrovat, jak ho lze vyřešit.
+
+Sami můžete EduLint používat jedním ze tří způsobů: nainstalovat si ho do Thonny (doporučeno), skrz
+$$html <a href="https://edulint.com">webového rozhraní</a> 
+nebo nainstalovat si ho jako Python balíček pomocí pip.
+
+V tomto návodu popíšeme instalaci do Thonny.
+
+### Thonny-EduLint
+
+Spusťte Thonny a proveďte v něm následující kroky:
+
+1. ‹Tools› → ‹Manage plug-ins...› → vyhledejte ‹thonny-edulint› → vyberte ‹thonny-edulint› ze seznamu výsledků → stiskněte tlačítko ‹Install›
+
+2. Zavřete a znovu otevřete Thonny
+
+$$html <img src="thonny_edulint_install.png" width="700">
+
+Po novém otevření Thonny byste měli nově vidět ikonku koštěte v hlavní liště. Že vše funguje si můžete vyzkoušet tak, že v Thonny otevřete libovolný Python soubor a analýzu spustíte buď kliknutím na ikonku koštěte, nebo klávesovou zkratkou F9.
+
+EduLint lze spustit pouze na uloženém souboru. Pokud tedy vytváříte úplně nový soubor, nezapomeňte ho uložit, než spustíte analýzu. Pokud otvíráte již existující soubor, EduLint vždy soubor před analýzou automaticky uloží na disk.
+
+$$html <img src="thonny_running.png" width="700">
+
+A jak případně později upgradovat EduLint na novější verzi? Postup je stejný jako při instalaci, pouze se Vám místo tlačítka Install zobrazí tlačítko ‹Upgrade›.
+
+### Použití v IB111
+
+IB111 vyžaduje pro EduLint vlastní konfiguraci, dodávanou spolu s kostrami příkladu v souboru ib111.toml. To, že používáte správnou konfiguraci, poznáte tak, že po kontrole souboru se v EduLint tabu píše "used configuration: ib111.toml". Pokud tab neobsahuje žádný text začínající "used configuration", spusťte nejdřív kontrolu kódu. Pokud tab obsahuje například text "used configuration: default", pak správnou konfiguraci nepoužíváte. Pokud nepoužíváte správnou konfiguraci, zkontrolujte, že soubor ib111.toml je obsažený ve stejném adresáři, jako soubor, který právě kontrolujete. Případně můžete do zdrojového kódu vložit řádek "# edulint: config=c:\cesta\ke\stazenemu\ib111.toml" (s cestou, na které máte soubor ib111.toml uložený ve svém počítači).
+
+EduLint reportuje dva typy problémů: error a warning. Všechny problémy typu error je nutné vyřešit před úspěšným odevzdáním. Problémy typu warning můžou sloužit ke zlepšení stylu nebo odhalení chyby, ale jejich zapracování není vyžadované. Reportování problémů typu warning je možné vypnout vložením řádku "# edulint: set-groups=" do zdrojového kódu. Jejich vypnutí ovšem nedoporučujeme.
+
+## Mypy
+
+«Mypy» je nástroj na «statickú kontrolu typov». Od «kapitoly 05»
+v zbierke budeme v tomto predmete vyžadovať, aby na Vami odovzdaných
+kódoch úspešne prešla kontrola nástrojom Mypy.  Výsledok tejto
+kontroly uvidíte spolu s výsledkami ostatných testov v «poznámkovom
+bloku» v IS. Ak používate prostredie «Thonny», program Mypy máte
+automaticky k dispozícii.
+
+# Základné použitie SW
+
+## Thonny
+
+Na programovanie v Pythone odporúčame vývojové prostredie «Thonny».
+Jedná sa o jednoduché prostredie vhodné pre začiatočníkov.  Thonny
+je nainštalované vo všetkých učebniach, v ktorých prebiehajú
+cvičenia. Návod na jeho inštaláciu na vlastný počítač nájdete
+vyššie.
+
+### Základy
+
+Pomocou ‹View› → ‹Files› môžete prehľadávať priečinky a otvárať
+jednotlivé súbory. Tento režim je ideálny na vypracovávanie úloh zo
+zbierky.
+$$html <img src="thonny_files.png" width="700">
+
+Aktuálny súbor spustíte pomocou klávesy ‹F5›, zeleného tlačidla
+‹Play› alebo pomocou ‹Run› → ‹Run current script›.  Bežiaci program
+zastavíte červeným tlačidlom ‹STOP›, alebo pomocou ‹Run› →
+‹Stop/Restart backend›.
+$$html <img src="thonny_run_stop.png" width="700">
+
+Ak Váš program úspešne skončí, v shelli vľavo dole sa neobjavia
+žiadne chybové hlášky a zobrazí sa nový prompt.
+
+$$html <img src="thonny_success.png" width="700">
+
+Ak Váš program cyklí, chybové hlášky sa tiež nezobrazujú, ale
+nezobrazí sa ani nový prompt v shelli.
+
+$$html <img src="thonny_cycle.png" width="700">
+
+Ak Váš program skončil s chybou, v shelli vľavo dole uvidíte
+príslušné chybové hlásenie obsahujúce «názov chyby» a «číslo
+riadka», na ktorom sa chyba nachádza.
+
+$$html <img src="thonny_fail.png" width="700">
+
+Rozpracovaný súbor uložíte pomocou pomocou ‹Súbor› → ‹uložiť›,
+prípadne ‹Ctrl+S›. «Pozor»: Thonny súbory automaticky ukladá len pri
+spustení. Pred spustením Mypy, Flake8, alebo pred odovzdaním súboru
+sa uistite, že máte jeho aktuálnu verziu «uloženú».
+
+### Ďalšie tipy
+
+Pri hľadaní chýb v programe Vám môže pomôcť «debugger», ktorý slúži
+na krokovanie programu a priebežné sledovanie hodnôt premenných.
+Debugger spustíte pomocou tlačidla s chrobákom, alebo jedného
+z ‹Run› → ‹Debug script›. Postupovať v programe je možné jedným
+z troch typov krokov. Debugger v Thonny navyše zobrazuje aj postupné
+vyhodnocovanie výrazov a volané funkcie zobrazuje vždy v novom okne
+(máte tak prehľad o tom, ktorá funkcia volala ktorú a v akom
+kontexte).
+
+$$html <img src="thonny_debugger.png" width="700">
+
+V tomto predmete je vyžadované, aby odovzdávané programy prešli
+kontrolou Flake8 a neskôr aj Mypy (viz. nižšie). Určitú časť týchto
+kontrol pokrýva v Thonny «Assistant».
+
+«Pozor»: Varovania Assitant nepokrývajú všetky chyby, ktoré môže
+Mypy s prepínačom ‹--strict› hlásiť. Podobne varovania na chyby
+štýlu nemusia 100% korešpondovať s programom ‹Flake8›.  Napriek tomu
+je Assistant užitočný a môže Vám pomôcť predísť niektorým typom
+chýb. Assistant zobrazíte pomocou ‹View› → ‹Assistant›:
+
+$$html <img src="thonny_assistant.png" width="700">
+
+## EduLint
+
+Jak už bylo řečeno v sekci ‹Inštalácia SW› → ‹EduLint› tohoto dokumentu,
+EduLint lze po instalaci do Thonny spustit kliknutím na ikonku koštěte.
+Více informací najdete v uvedené sekci.
+
+## Mypy
+
+Najprv spustite Thonny a v ňom shell (‹Tools› → ‹Open system
+shell...›). V shelli zadajte príkaz ‹python -m mypy --strict
+nazov_suboru›. Tento spustí kontrolu nástrojom Mypy na súbore
+‹nazov_suboru›.
+
+«Pozor»: Mypy spúšťajte vždy s modifikátorom ‹--strict›, inak typové
+chyby vo funkciách bez anotácií «ignoruje».
+
+Mypy po spustení na programe s typovými chybami vypíše nájdené chyby
+na výstup priamo do shellu, podobne ako Flake8. Vypisuje každú chybu
+na nový riadok, pričom najprv uvádza «číslo riadku» s príslušnou
+chybou a za ním aj «slovný opis» chyby. Príklad výstupu Mypy na
+programe «s chybami»:
+
+$$html <img src="mypy_fail.png" width="700">
+
+Po spustení na programe neobsahujúcom typové chyby Mypy vypíše do
+shellu, že v súbore neboli nájdené žiadne chyby. Vyzerá to
+nasledovne:
+
+$$html <img src="mypy_success.png" width="700">
+
+# Odovzdávanie príprav
+
+## Kostry a vypracovanie
+
+«Kostry riešení» príkladov zo zbierky nájdete v «študijných materiáloch» v ISe:
+‹Student› → ‹IB111› → ‹Studijní materály› → ‹Učební materiály›. Kostry k danej
+kapitole zbierky sa vždy nachádzajú v adresári s korešpondujúcim číslom.
+Na adresár kliknite pravým tlačidlom a zvoľte možnosť ‹Stáhnout jako ZIP›.
+Na obrázku vidíte, ako stiahnuť kostry ku kapitole 01:
+$$html <img src="download_zip.png" width="700">
+
+Riešenia vpisujte priamo do pripravených súborov.
+V kostre riešenia sa nachádzajú pripravené hlavičky
+požadovaných funkcií, Vaše riešenie vpisujte do tela funkcie tak,
+že ním nahradíte príkaz ‹pass›.
+
+«Pozor»: Aby ste mohli úspešne odovzdať príklad, «nemeňte názov»
+súboru! Odovzdávajú sa «len» príklady typu «p», tj. také, ktorých
+názov súboru začína ‹pN_›.
+
+## Odovzdanie
+
+Týždenné prípravy odovzdávajte do pripravenej odevzdávárny v ISe.
+Nájdete ju v ‹Student› → ‹IB111› → ‹Odevzdávárny›. Prípravu pre daný
+týždeň odovzdávajte do odevzdávárny s číslom korešpondujúcim s
+číslom príslušnej kapitoly v zbierke.
+
+Do odevzdávárny sa príklady vkladajú pomocou ‹Soubor - nahrát›.
+
+$$html <img src="upload_file.png" width="700">
+
+Vyberte príslušný súbor a potvrďte tlačidlom vložiť.
+
+$$html <img src="paste_file.png" width="700">
+
+Názov súboru nijako «nemeňte»! IS si k názvu automaticky predradí
+Vaše meno a UČO.
+
+$$html <img src="file_name.png" width="700">
+
+Ak chcete niektorý z príkladov odovzdať znovu, jednoducho ho znovu
+nahrajte do odevzdávárny. Pri vkladaní označte, že súbory s rovnakým
+názvom majú byť «prepísané». Súborov môžte do odevzdávárny vkladať
+viacero naraz.
+
+$$html <img src="rewrite_file.png" width="700">
+
+Pred odovzdaním nezabudnite vždy «uložiť» aktuálnu verziu Vášho
+programu!
+
+## Poznámkové bloky
+
+Výsledok Vášho odovzdania uvidíte do pár minút v «poznámkových
+blokoch» v ISe. Ak sa Vám výsledok v bloku nezobrazí «do pol hodiny»
+a ste «presvedčení», že chyba nebola na Vašej strane, nahláste
+prosím problém v «diskusnom fóre» v ISe.
+
+K výsledkom odovzdanie sa dostanete cez ‹Student› → ‹IB111› →
+‹Poznámkové bloky›.  Bloky sú organizované podľa čísel týždňov (na
+obrázku zvýraznené zelenou). Obsahujú informáciu o tom, ku ktorému
+odovzdaniu sa vypísaný výsledok testov viaže (vyznačené modrou).
+Blok je ďalej organizovaný podľa jednotlivých súborov odovzdaných do
+odevzdávárny (vyznačené bordovou). K príslušnému súboru vidíte, či
+na ňom prešli testy a prípadne ktoré testy zlyhali (vyznačené
+žltou). Na nasledovnom obrázku je blok z odovzdania príkladu
+‹p1_sequence›, ktorý obsahoval «štýlové chyby» (neprešiel test
+Flake8).
+
+$$html <img src="one_file_flake.png" width="700">
+
+Vždy, keď niečo vložíte do odevzdávárny, vyhodnotí sa nanovo celý
+jej obsah. Poznámkový blok v ISe obsahuje výsledky testov na
+«poslednom odovzdaní». Počíta sa Vám výsledok «najlepšieho
+odovzdania», tj. nie nutne toho odovzdania, ku ktorému sa viaže
+aktuálny obsah bloku. Na poslednom riadku príslušného bloku vždy
+vidíte čas a výsledok najlepšieho odovzdania (na obrázku nižšie
+vyznačené modrou).
+
+Pokiaľ na nejakom Vašom riešení neprejde kontrola Flake8, ďalšie
+testy (asserty priložené v kostre riešenia) sa nevyhodnotia. Na
+ďalšom obrázku vidíte odovzdanie, ktoré je zároveň aj najlepším
+odovzdaním a obsahuje príklad ‹p1_sequence›, na ktorom prešla
+kontrola Flake8, ale neprešli testy (vypisuje sa prvý ‹assert›,
+ktorý neprešiel); príklad ‹p3_triples›, na ktorom neprešla kontrola
+Flake8 (tj. o výsledkoch príkazov ‹assert› nič neviete) a príklad
+‹p5_fibsum›, na ktorom úspešne prešli všetky testy aj Flake8.
+
+$$html <img src="files_flake_sanity_pass.png" width="700">
