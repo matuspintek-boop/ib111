@@ -9,6 +9,9 @@ from ib111 import week_12  # noqa
 # alespoň 1. Rozdělení musí být takové, že žádný zápis neobsahuje
 # levostranné nuly.
 
+# zacinam od zaciatku stringu, navolim si hodnoty od low az po hight, zvysok strigu odseknem 
+# a znovu zavolam rovnaku funkciu ktora mi vrati mnozinu moznych stringov
+
 def restore_sequence(digits: str, low: int, high: int) -> set[str]:
     pass
 

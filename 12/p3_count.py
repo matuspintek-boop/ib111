@@ -20,9 +20,34 @@ from ib111 import week_12  # noqa
 #    následuje alespoň jedna stejná cifra,
 #  • pro ‹num=1234› a ‹seq=0› je výsledkem součet všech číslic,
 #    totiž 10.
+def decompose(num: int) -> list[int]:
+    output: list[int] = []
+
+    while num > 0:
+        output.append(num % 10)
+        num //= 10
+
+    output.reverse()
+
+    return output
+
 
 def count_seq(num: int, seq: int) -> int:
-    pass
+
+    output_sum: int = 0
+    work_l: list[int] = decompose(num)
+    lenght: int = len(work_l)
+
+    for index, val in enumerate(work_l):
+        i: int = 1
+        sequence: bool = True
+        while i <= seq and sequence:
+            sequence = work_l[(index + i) % lenght] == val
+            i += 1
+        if sequence:
+            output_sum += val
+
+    return output_sum
 
 
 def main() -> None:

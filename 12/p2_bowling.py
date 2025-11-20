@@ -49,13 +49,39 @@ from ib111 import week_12  # noqa
 
 
 def bowling_score(rolls: list[int]) -> int:
-    points_total: int = 0
+
     round: int = 0
-    throw: int = 1
-    for points in rolls:
+
+    # output
+    total_points: int = 0
+
+    # position in rolls (throw number in general)
+    current_pointer = 0
+
+    while round < 10:
         if round < 9:
-            
-        
+            if rolls[current_pointer] == 10:
+                total_points += 10 + rolls[current_pointer+1]\
+                                + rolls[current_pointer+2]
+
+                current_pointer += 1
+
+            elif rolls[current_pointer] + rolls[current_pointer+1] == 10:
+                total_points += (10 + rolls[current_pointer + 2])
+                current_pointer += 2
+
+            elif rolls[current_pointer] + rolls[current_pointer+1] < 10:
+                total_points += rolls[current_pointer]\
+                                + rolls[current_pointer+1]
+
+                current_pointer += 2
+
+        elif round == 9:
+            for i in range(current_pointer, len(rolls)):
+                total_points += rolls[i]
+
+        round += 1
+    return total_points
 
 
 def main() -> None:
