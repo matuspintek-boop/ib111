@@ -49,7 +49,13 @@ from ib111 import week_12  # noqa
 
 
 def bowling_score(rolls: list[int]) -> int:
-    pass
+    points_total: int = 0
+    round: int = 0
+    throw: int = 1
+    for points in rolls:
+        if round < 9:
+            
+        
 
 
 def main() -> None:
