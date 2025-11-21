@@ -12,7 +12,44 @@ from ib111 import week_12  # noqa
 # zacinam od zaciatku stringu, navolim si hodnoty od low az po hight, zvysok strigu odseknem 
 # a znovu zavolam rovnaku funkciu ktora mi vrati mnozinu moznych stringov
 
+def slice(string: str, num: int) -> str:
+    output: str = ""
+
+    for i in range(num, len(string)):
+        output += string[i]
+    return output
+
+def my_restore_sequence(digits: str, low: str, high: str) -> set[str]:
+    print(digits)
+    next_char: int = 0
+    current_str = ""
+    if digits == "":
+        return {""}
+
+    output: set[str] = set()
+
+    while current_str < low:
+        if next_char < len(digits):
+            current_str += digits[next_char]
+            next_char += 1
+            continue
+        return set()
+    
+
+    while current_str <= high:
+        print(slice(digits, next_char), digits, next_char, my_restore_sequence(slice(digits, next_char), low, high))
+        for string in my_restore_sequence(slice(digits, next_char), low, high):
+            output.add(current_str+","+string)
+        if next_char < len(digits):
+            current_str += digits[next_char]
+            next_char += 1
+            continue
+        return output
+    
+print(my_restore_sequence("1111", "10", "11"))
+
 def restore_sequence(digits: str, low: int, high: int) -> set[str]:
+    otput: set[str] = set()
     pass
 
 
