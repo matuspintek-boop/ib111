@@ -9,9 +9,18 @@ from ib111 import week_12  # noqa
 # alespoň 1. Rozdělení musí být takové, že žádný zápis neobsahuje
 # levostranné nuly.
 
-# zacinam od zaciatku stringu, navolim si hodnoty od low az po hight, zvysok strigu odseknem 
-# a znovu zavolam rovnaku funkciu ktora mi vrati mnozinu moznych stringov
 
+# convert int to binary str
+def num_to_binstr(num: int, convertor: list[str]) -> str:
+    output: str = ""
+    while num > 0:
+        output = convertor[num % 2] + output
+        num //= 2
+
+    return output
+
+
+# str.slice() replacement
 def slice(string: str, num: int) -> str:
     output: str = ""
 
@@ -19,8 +28,23 @@ def slice(string: str, num: int) -> str:
         output += string[i]
     return output
 
+
+# binary string equalizer
+def is_lower(str1: str, str2: str, eq: bool) -> bool:
+    if len(str1) > 0 and str1[0] == "0":
+        return False
+    elif len(str1) < len(str2):
+        return True
+    elif len(str1) > len(str2):
+        return False
+    return str1 <= str2 if eq else str1 < str2
+
+# recursive function
+# always splits string into val and rest max >= val >= min
+# and merges it with substrings of rest with ","
+
+
 def my_restore_sequence(digits: str, low: str, high: str) -> set[str]:
-    print(digits)
     next_char: int = 0
     current_str = ""
     if digits == "":
@@ -28,29 +52,33 @@ def my_restore_sequence(digits: str, low: str, high: str) -> set[str]:
 
     output: set[str] = set()
 
-    while current_str < low:
+    while is_lower(current_str, low, False):
         if next_char < len(digits):
             current_str += digits[next_char]
             next_char += 1
             continue
         return set()
-    
 
-    while current_str <= high:
-        print(slice(digits, next_char), digits, next_char, my_restore_sequence(slice(digits, next_char), low, high))
+    while is_lower(current_str, high, True):
         for string in my_restore_sequence(slice(digits, next_char), low, high):
-            output.add(current_str+","+string)
+            if len(string) > 0:
+                output.add(current_str+","+string)
+            else:
+                output.add(current_str)
         if next_char < len(digits):
             current_str += digits[next_char]
             next_char += 1
             continue
         return output
-    
-print(my_restore_sequence("1111", "10", "11"))
+    return output
+
 
 def restore_sequence(digits: str, low: int, high: int) -> set[str]:
-    otput: set[str] = set()
-    pass
+
+    convertor_arr: list[str] = ["0", "1"]
+
+    return my_restore_sequence(digits, num_to_binstr(low, convertor_arr),
+                               num_to_binstr(high, convertor_arr))
 
 
 def main() -> None:
