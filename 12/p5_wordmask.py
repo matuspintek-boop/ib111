@@ -27,7 +27,28 @@ from ib111 import week_12  # noqa
 # ‹['abxbaxa', 'abybaxa', 'abxbaya', 'abybaya']›.
 
 def wordmask(word: str, mask: str, alternatives: list[str]) -> list[str]:
-    pass
+    mask_pointer: int = 0
+    word_pointer: int = 0
+    word_length: int = len(word)
+    mask_length: int = len(mask)
+
+    output: list[str] = []
+
+    while word_pointer < word_length:
+        temp: list[str] = []
+        if len(output) == 0:
+            output.append("")
+        for string in output:
+            if mask[mask_pointer % mask_length] == "X":
+                temp.append(string+word[word_pointer])
+            else:
+                for char in alternatives:
+                    temp.append(string+char)
+        output = temp
+        mask_pointer += 1
+        word_pointer += 1
+
+    return output
 
 
 def main() -> None:
