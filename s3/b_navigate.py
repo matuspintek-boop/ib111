@@ -24,9 +24,46 @@ Plan = dict[Position, Tile]
 # Doporučení: Použijte princip backtrackingu. Budete muset nějak zařídit, aby
 # robot neběhal v kruzích (pak by vaše funkce nemusela skončit).
 
+def find_way(plan: Plan, current_position: Position,
+             goal: Position, visited: set[Position],
+             road: list[Position]) -> list[Position]:
+    if current_position in visited:
+        return road
+    else:
+        visited.add(current_position)
+        road.append(current_position)
+    if current_position == goal:
+        return road
+    else:
+
+        x, y = current_position
+        for heading in plan[current_position]:
+            if heading == 0:
+                if goal == find_way(plan, (x, y - 1), goal, visited, road)[-1]:
+                    return road
+            elif heading == 1:
+                if goal == find_way(plan, (x + 1, y), goal, visited, road)[-1]:
+                    return road
+            elif heading == 2:
+                if goal == find_way(plan, (x, y + 1), goal, visited, road)[-1]:
+                    return road
+            elif heading == 3:
+                if goal == find_way(plan, (x - 1, y), goal, visited, road)[-1]:
+                    return road
+        road.pop()
+        return road
+
+
 def navigate(plan: Plan, start: Position, goal: Position) \
         -> list[Position] | None:
-    pass
+
+    result: list[Position] = find_way(plan, start, goal, set(), [])
+
+    if len(result) > 0:
+        return result
+
+    # for mypy to be happy
+    return None
 
 
 def main() -> None:

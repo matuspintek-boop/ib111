@@ -40,9 +40,8 @@ def example_tree() -> TreeDict:
 #  3. žádný uzel není svým vlastním (přímým) potomkem.
 def check_tree_validity(tree: TreeDict, children: set[int],
                         parent_key: int) -> tuple[bool, set[int]]:
-
-    for child in tree[parent_key]:
-        if child in children:
+    for child in tree.get(parent_key, [-1]):
+        if child == -1 or child in children:
             return (False, children)
         else:
             children.add(child)
@@ -84,6 +83,8 @@ def make_tree(tree: TreeDict) -> Tree:
 
 
 def main() -> None:
+    # tree = {1: [2]}
+    # assert not is_tree(tree)
     assert is_tree(example_tree())
     assert not is_tree({1: [1]})
     assert not is_tree({})
