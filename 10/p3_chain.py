@@ -15,9 +15,14 @@ Data = dict[first, list[tuple[last, Num]]]
 
 def convert_to_eleven_base(num: int) -> tuple[first, last]:
     last_digit: int = num % 11
+    first_digit: int = -1
     while num > 0:
-        first_digit: int = num % 11
+        first_digit = num % 11
         num //= 11
+
+    if first_digit == -1:
+        first_digit = last_digit
+
     return (first_digit, last_digit)
 
 
@@ -53,6 +58,7 @@ def elven_chain(numbers: set[int], length: int) -> bool:
 
 
 def main() -> None:
+    assert elven_chain({0}, 1)
     assert elven_chain({57, 25, 36}, 3)
     assert elven_chain(set(), 0)
     assert elven_chain({1}, 1)

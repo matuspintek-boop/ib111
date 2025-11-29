@@ -28,7 +28,6 @@ Plan = dict[Position, Tile]
 # dílek, a navíc je z tohoto dílku možné se zase vrátit.
 
 def is_correct(plan: Plan) -> bool:
-<<<<<<< HEAD
     for position in plan.keys():
         x, y = position
         for heading in plan[position]:
@@ -49,9 +48,6 @@ def is_correct(plan: Plan) -> bool:
                     continue
                 return False
     return True
-=======
-    pass
->>>>>>> 86de6671d8cfc1b1bdd86d787b45ccf64db353e7
 
 
 # Dále implementujte čistou funkci ‹run›, která bude simulovat pohyb robota
@@ -70,7 +66,6 @@ def is_correct(plan: Plan) -> bool:
 #   znamená otočení doprava.
 # • Pokud robot přijde na dílek, kde už někdy v minulosti byl, zastaví.
 
-<<<<<<< HEAD
 # upgraded function run
 def my_run(plan: Plan, current_heading: int, position: Position,
            already_visited: set[Position], start: bool) -> Position:
@@ -115,10 +110,6 @@ def my_run(plan: Plan, current_heading: int, position: Position,
 
 def run(plan: Plan, start: Position) -> Position:
     return my_run(plan, 0, start, set(), True)
-=======
-def run(plan: Plan, start: Position) -> Position:
-    pass
->>>>>>> 86de6671d8cfc1b1bdd86d787b45ccf64db353e7
 
 
 def main() -> None:

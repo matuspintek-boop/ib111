@@ -19,9 +19,13 @@ Data = dict[first, list[tuple[last, num]]]
 def get_first_last_dig(number: num) -> tuple[first, last, num]:
     number_copy = number
     last_d: last = number % 16
+    first_d: first = -1
     while number > 0:
-        first_d: first = number % 16
+        first_d = number % 16
         number //= 16
+
+    if first_d == -1:
+        first_d = last_d
     return (first_d, last_d, number_copy)
 
 
@@ -82,6 +86,7 @@ def hex_circle(numbers: set[int]) -> int:
 
 
 def main() -> None:
+    assert hex_circle({0}) == 1
     assert hex_circle({16, 1}) == 1
     assert hex_circle(set()) == 0
     assert hex_circle({0xabc, 0x123}) == 0
