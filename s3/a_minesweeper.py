@@ -74,14 +74,54 @@ class Minesweeper:
 
     def __init__(self, width: int, height: int,
                  mines: dict[Position, int]):
-        pass
+        self.status = [[UNKNOWN for i in range(width)] for i in range(height)]
+        self.mines: dict[Position, int] = mines.copy()
+        self.score: int = 0
+        self.explosion_id: int = 0
 
     # Metoda ‹uncover› provede odkrytí políčka dle popisu výše a případně
     # upraví skóre. Předpokládejte, že souřadnice jsou validní (tj. v rozsahu
     # herní plochy).
 
+    def explosion(self, x: int, y: int, power: int) -> None:
+        self.status[y][x] = EXPLODED
+        for u in range(-power, power + 1):
+            for v in range(-power, power + 1):
+                if -1 < x-u < len(self.status[0]) \
+                   and -1 < y - v < len(self.status):
+                    if self.mines.get((x-u, y-v), -1) > - 1:
+                        self.score -= 10
+                        self.explosion(x-u, y-v,
+                                       self.mines.pop((x - u, y - v)))
+                    if self.status[y-v][x-u] != EXPLODED:
+                        self.status[y-v][x-u] = DESTROYED
+        return
+
+    def scan_surroundings(self, x: int, y: int) -> int:
+        mines_found: int = 0
+        for u in range(-1, 2):
+            for v in range(-1, 2):
+                if -1 < x-u < len(self.status[0]) \
+                   and -1 < y - v < len(self.status):
+                    if self.status[y-v][x-u] == EXPLODED \
+                       or self.mines.get((x - u, y - v), -1) > -1:
+                        mines_found += 1
+        return mines_found
+
     def uncover(self, x: int, y: int) -> None:
-        pass
+        if self.mines.get((x, y), False):
+            self.score -= 10
+            self.explosion(x, y, self.mines.pop((x, y)))
+
+        elif self.status[y][x] == UNKNOWN:
+            self.status[y][x] = self.scan_surroundings(x, y)
+            self.score += 1
+            if self.status[y][x] == 0:
+                for u in range(-1, 2):
+                    for v in range(-1, 2):
+                        if -1 < x-u < len(self.status[0]) \
+                           and -1 < y - v < len(self.status):
+                            self.uncover(x-u, y-v)
 
 
 def main() -> None:
