@@ -109,7 +109,7 @@ class Minesweeper:
         return mines_found
 
     def uncover(self, x: int, y: int) -> None:
-        if self.mines.get((x, y), False):
+        if self.mines.get((x, y), -1) > -1:
             self.score -= 10
             self.explosion(x, y, self.mines.pop((x, y)))
 
@@ -207,6 +207,17 @@ def main() -> None:
     ]
 
     assert mines == {(2, 2): 5, (4, 5): 1, (6, 1): 0, (6, 3): 1, (6, 4): 3}
+
+    mines = {(0, 1): 0, (1, 0): 0, (1, 1): 0}
+    ms = Minesweeper(3, 3, mines)
+    ms.uncover(0, 0)
+    ms.uncover(0, 0)
+    ms.uncover(0, 2)
+    ms.uncover(2, 0)
+    ms.uncover(2, 2)
+    ms.uncover(1, 1)
+    assert ms.score == -6
+    assert ms.status == [[3, -1, 2], [-1, -2, -1], [2, -1, 1]]
 
 
 if __name__ == '__main__':
