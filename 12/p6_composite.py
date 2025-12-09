@@ -1,4 +1,5 @@
 from ib111 import week_12  # noqa
+from math import isqrt
 
 
 # Napište čistou funkci ‹highly_composite›, která dostane na vstupu
@@ -8,8 +9,54 @@ from ib111 import week_12  # noqa
 # které v zadané množině nejsou), než libovolné menší číslo ze
 # zadané množiny.
 
+def count_divisors(num: int) -> int:
+    divisors: set[int] = set()
+    divisor: int = 1
+
+    upper_border: int = isqrt(num)
+
+    while divisor <= upper_border:
+        if num % divisor == 0:
+            divisors.add(divisor)
+            divisors.add(num // divisor)
+        divisor += 1
+
+    return len(divisors)
+
 def highly_composite(numbers: set[int]) -> set[int]:
-    pass
+    work_list: list[int] = list(numbers)
+    work_list.sort()
+    print(work_list)
+    
+    output: set[int] = set()
+    output.add(work_list[0])
+    ancestor = work_list[0]
+    counted_divisors  = False
+
+    for num in work_list:
+        if num % ancestor == 0:
+            ancestor = num
+            output.add(num)
+            counted_divisors = False
+        else:
+            current_divisors = count_divisors(num)
+            if counted_divisors:
+                if current_divisors > ancestor_divisors:
+                    ancestor_divisors = current_divisors
+                    ancestor = num
+                    output.add(num)
+                    counted_divisors = True
+            else:
+                ancestor_divisors = count_divisors(ancestor)
+                if current_divisors > ancestor_divisors:
+                    ancestor_divisors = current_divisors
+                    ancestor = num
+                    output.add(num)
+                    counted_divisors = True
+
+                            
+
+    return output
 
 
 def main() -> None:
